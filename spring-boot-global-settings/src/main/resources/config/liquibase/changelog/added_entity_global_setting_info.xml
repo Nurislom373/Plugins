@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <property name="autoIncrementGlobalSettings" value="true" dbms="mysql,h2,postgresql,oracle,mssql"/>
+
+    <changeSet id="added_entity_global_setting_info" author="Nurislom">
+        <createTable tableName="global_setting_info" remarks="Global Setting Info">
+            <column name="id" type="bigInt" autoIncrement="${autoIncrementGlobalSettings}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="parent_id" type="bigInt" remarks="Parent Id">
+                <constraints nullable="true" />
+            </column>
+            <column name="class_name" type="varchar(256)" remarks="Class Name">
+                <constraints nullable="false" />
+            </column>
+            <column name="implement_class" type="varchar(256)" remarks="Class Type">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

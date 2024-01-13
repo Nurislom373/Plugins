@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <property name="autoIncrementGlobalSettings" value="true" dbms="mysql,h2,postgresql,oracle,mssql"/>
+
+    <changeSet id="added_entity_global_setting_fields_title" author="Nurislom">
+        <createTable tableName="global_setting_fields_title" remarks="Global Setting Fields Title">
+            <column name="global_setting_fields_id" type="bigint" remarks="global_setting_fields_id">
+                <constraints nullable="true" />
+            </column>
+            <column name="global_setting_title_id" type="bigint" remarks="global_setting_title_id">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="added_entity_global_setting_fields_title_foreign_key" author="Nurislom">
+        <addForeignKeyConstraint baseColumnNames="global_setting_fields_id"
+                                 baseTableName="global_setting_fields_title"
+                                 constraintName="fk_global_setting_fields_global_setting_fields_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="global_setting_fields"/>
+
+        <addForeignKeyConstraint baseColumnNames="global_setting_title_id"
+                                 baseTableName="global_setting_fields_title"
+                                 constraintName="fk_global_setting_fields_global_setting_title_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="global_setting_title"/>
+    </changeSet>
+
+</databaseChangeLog>

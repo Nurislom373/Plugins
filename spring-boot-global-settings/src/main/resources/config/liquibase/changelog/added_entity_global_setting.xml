@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <property name="autoIncrementGlobalSettings" value="true" dbms="mysql,h2,postgresql,oracle,mssql"/>
+
+    <changeSet id="added_entity_global_setting_fields" author="Nurislom">
+        <createTable tableName="global_setting_fields" remarks="Global Setting Fields">
+            <column name="id" type="bigInt" autoIncrement="${autoIncrementGlobalSettings}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="global_setting_info_id" type="bigInt">
+                <constraints nullable="false"/>
+            </column>
+            <column name="class_name" type="varchar(256)" remarks="Class Name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="input_type" type="varchar(256)" remarks="Input Type">
+                <constraints nullable="false"/>
+            </column>
+            <column name="field_type" type="varchar(256)" remarks="Field Type">
+                <constraints nullable="false"/>
+            </column>
+            <column name="field_class_type" type="varchar(256)" remarks="Field Class Type">
+                <constraints nullable="false"/>
+            </column>
+            <column name="field_name" type="varchar(256)" remarks="Field">
+                <constraints nullable="false"/>
+            </column>
+            <column name="field_value" type="text" remarks="Field Value">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="global_setting_info_id"
+                                 baseTableName="global_setting_fields"
+                                 constraintName="fk_global_setting_fields_global_setting_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="global_setting_info"/>
+    </changeSet>
+
+    <changeSet id="836573485435365464" author="Nurislom">
+        <dropColumn columnName="class_name" schemaName="public"
+                    tableName="global_setting_fields">
+            <column name="class_name"/>
+        </dropColumn>
+    </changeSet>
+
+    <changeSet id="093768954765846754675" author="Nurislom">
+        <dropNotNullConstraint columnDataType="text"
+                               columnName="field_value"
+                               schemaName="public"
+                               tableName="global_setting_fields"/>
+    </changeSet>
+
+</databaseChangeLog>
